@@ -13,11 +13,12 @@ class Neuron
     void adjust(const double error);
     
   private:
-    std::vector<double> input;
-    std::vector<double> weights;
-    double biase;
-    double learningRate;
-    double output;
+    double thetaTX(const std::vector<double>& input);
+    std::vector<double> _input;
+    std::vector<double> _theta;
+    double _biase;
+    double _learningRate;
+    double _output;
 };
 
 #endif
