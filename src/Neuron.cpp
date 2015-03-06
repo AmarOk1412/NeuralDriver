@@ -1,14 +1,13 @@
 #include "Neuron.h"
 #include <math.h>
+#include <random>
 
 #include <iostream>
 #include <assert.h>
 
 Neuron::Neuron()
 {
-  _biase = -30;
-  _theta.push_back(20);
-  _theta.push_back(20);
+  init(5, 3.4);
 }
 
 Neuron::~Neuron()
@@ -50,12 +49,22 @@ double Neuron::thetaTX(const std::vector<double>& input)
 void Neuron::adjust(const double error)
 {
   //Error is a ratio
-  std::vector<double>::const_iterator itThetab = _theta.cbegin();
-  std::vector<double>::const_iterator itThetae = _theta.cend();
+  std::vector<double>::iterator itThetab = _theta.begin();
+  std::vector<double>::iterator itThetae = _theta.end();
   while(itThetab != itThetae)
   {
     *itThetab *= error;
     ++itThetab;
     ++itThetae;
   }
+}
+
+void Neuron::init(int length, double epsilon)
+{
+   std::uniform_real_distribution<double> unif(-epsilon, epsilon);
+   std::random_device rand_dev;
+   std::mt19937 rand_engine(rand_dev());
+   for(auto i = 0; i < length; ++i)
+     _theta.push_back(unif(rand_engine));
+   _biase = unif(rand_engine);
 }

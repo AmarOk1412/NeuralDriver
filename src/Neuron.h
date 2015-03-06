@@ -14,6 +14,7 @@ class Neuron
     
   private:
     double thetaTX(const std::vector<double>& input);
+    void init(int length, double epsilon);
     std::vector<double> _input;
     std::vector<double> _theta;
     double _biase;
