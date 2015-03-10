@@ -2,15 +2,21 @@
 #define NEURON_H
 
 #include <vector>
+#include <iostream>
 
 class Neuron
 {
   public:
     Neuron();
     ~Neuron();
-    Neuron( const Neuron& neuron);
+    Neuron(const Neuron& neuron);
     double calcOutput(const std::vector<double> input);
     void adjust(const double error);
+    
+    const double getBiase() const;
+    const std::vector<double>& getThetas() const;
+    
+    Neuron& operator=(const Neuron& o);
     
   private:
     double thetaTX(const std::vector<double>& input);
@@ -21,5 +27,7 @@ class Neuron
     double _learningRate;
     double _output;
 };
+
+std::ostream& operator<<(std::ostream& out, Neuron const& n);
 
 #endif

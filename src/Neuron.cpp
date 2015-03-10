@@ -7,7 +7,7 @@
 
 Neuron::Neuron()
 {
-  init(5, 3.4);
+  init(2, 3.4);
 }
 
 Neuron::~Neuron()
@@ -68,3 +68,34 @@ void Neuron::init(int length, double epsilon)
      _theta.push_back(unif(rand_engine));
    _biase = unif(rand_engine);
 }
+
+
+Neuron& Neuron::operator=(const Neuron& o)
+{
+  //Some parameters will change (to pointer).
+  _input = o._input;
+  _theta = o._theta;
+  _biase = o._biase;
+  _learningRate = o._learningRate;
+  _output = o._output;
+}
+
+const double Neuron::getBiase() const
+{
+  return _biase;
+}
+    
+const std::vector<double>& Neuron::getThetas() const
+{
+  return _theta;
+}
+
+std::ostream& operator<<(std::ostream & out, const Neuron& n)
+{
+  out << '[' << n.getBiase() << ',';
+  std::vector<double> thetas = n.getThetas();
+  for(auto t : thetas)
+    out << t << ',';
+  out << ']';
+}
+    
