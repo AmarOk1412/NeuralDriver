@@ -5,9 +5,9 @@
 #include <iostream>
 #include <assert.h>
 
-Neuron::Neuron()
+Neuron::Neuron(const int nbInput)
 {
-  init(2, 3.4);
+  init(nbInput, 3.4);
 }
 
 Neuron::~Neuron()
@@ -20,7 +20,7 @@ Neuron::Neuron(const Neuron& neuron)
 
 }
 
-double Neuron::calcOutput(const std::vector<double> input)
+double Neuron::calcOutput(std::vector<double> const& input)
 {
   return 1/(1+exp(-thetaTX(input)));
 }

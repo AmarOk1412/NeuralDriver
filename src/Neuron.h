@@ -7,10 +7,10 @@
 class Neuron
 {
   public:
-    Neuron();
+    Neuron(const int nbInput);
     ~Neuron();
     Neuron(const Neuron& neuron);
-    double calcOutput(const std::vector<double> input);
+    double calcOutput(std::vector<double> const& input);
     void adjust(const double error);
     
     const double getBiase() const;
