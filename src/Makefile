@@ -5,7 +5,7 @@ H_FILES := $(wildcard *.h)
 all: clean neuralDriver
 
 neuralDriver:
-	g++ -o neuralDriver $(CPP_FILES) $(H_FILES) $(CXXFLAGS)
+	g++ -o neuralDriver $(CPP_FILES) $(H_FILES) $(CXXFLAGS) 2> errorLog
 
 clean:
 	@echo $(STOP)
