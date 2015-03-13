@@ -1,30 +1,15 @@
-#include "Neuron.h"
+#include "Network.h"
 #include <vector>
 #include <iostream>
 
 int main() {
 
-  Neuron n;
-  std::vector<double> t;
-  
-  t.push_back(0);
-  t.push_back(0);
-  std::cout << n.calcOutput(t) << std::endl;
-  t.clear();
-	t.push_back(0);
-	t.push_back(1);
-	std::cout << n.calcOutput(t) << std::endl;
-  t.clear();
-  t.push_back(1);
-  t.push_back(0);
-  std::cout << n.calcOutput(t) << std::endl;
-  t.clear();
-  t.push_back(1);
-  t.push_back(1);
-  std::cout << n.calcOutput(t) << std::endl;
-  t.clear();
-  std::cout << n;
-  std::cout << std::endl; 
-
+  std::vector<int> sn;
+  sn.push_back(2);
+  sn.push_back(1);
+	Network network(sn);
+	//TODO : calc output
+	//TODO : test costfunction
+	//TODO : implement forward/back prop
   return 0;
 }
