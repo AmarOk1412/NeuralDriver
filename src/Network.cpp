@@ -4,13 +4,13 @@
 
 Network::Network(std::vector<int> const sNetwork)
 {
-	for(auto i = 0; i < sNetwork.size()-1; ++i)
+	for(auto i = 1; i < sNetwork.size(); ++i)
 	{
-	  auto nbInput = sNetwork.at(i);
+	  auto nbInput = sNetwork.at(i-1);
 	  std::vector<Neuron> l;
 	  _network.push_back(l);
 		for(auto j = 0; j < sNetwork.at(i); ++j)
-		  _network.at(i).push_back(Neuron(nbInput));
+		  _network.at(i-1).push_back(Neuron(nbInput));
 	}
 		  
 	_lambda = 0.5;
@@ -21,24 +21,11 @@ Network::~Network()
 
 }
 
-Network::Network(const Network& network)
-{
-	for(auto i = 0; i < network._network.size(); ++i)
-	{
-	  _network.push_back(std::vector<Neuron>());
-    for(auto j = 0; j < network._network.at(i).size(); ++j)
-    {
-    	Neuron n(network._network.at(i).at(j));
-    	_network.at(i).push_back(n);
-    }
-  }
-}
-
 double Network::costfunction(std::vector<double> const& X, std::vector<double> const& ol, 
 																													 std::vector<double> const& y)
 {
   //One iteration. X -> input. ol -> output layer; y -> expected output
-  //TODO test
+  //TODO DEBUG, doesn't work at all
 	double J;
 	auto m = X.size();
 	auto K = _network.back().size();
@@ -74,7 +61,6 @@ double Network::costfunction(std::vector<double> const& X, std::vector<double> c
 
 std::vector<double> Network::forwardProp(std::vector<double> const& input)
 {
-  //TODO test
   std::vector<double> output;
   std::vector<double> cinput = input;
   std::vector<double> ninput;
@@ -91,4 +77,16 @@ std::vector<double> Network::forwardProp(std::vector<double> const& input)
 void backprop(std::vector<double> X, std::vector<double> y)
 {
 	//TODO
+}
+
+void Network::print() const
+{
+  std::cout << '[';
+  for(auto l = 0; l < _network.size(); ++l)
+	{
+		for(auto i = 0; i < _network.at(l).size(); ++i)
+	    std::cout << _network.at(l).at(i);
+	  std::cout << std::endl;
+	}
+  std::cout << ']' << std::endl;
 }

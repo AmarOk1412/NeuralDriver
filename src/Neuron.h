@@ -9,7 +9,6 @@ class Neuron
   public:
     Neuron(const int nbInput);
     ~Neuron();
-    Neuron(const Neuron& neuron);
     double calcOutput(std::vector<double> const& input);
     void adjust(const double error);
     

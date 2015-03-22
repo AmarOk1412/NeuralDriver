@@ -15,11 +15,6 @@ Neuron::~Neuron()
 
 }
 
-Neuron::Neuron(const Neuron& neuron)
-{
-
-}
-
 double Neuron::calcOutput(std::vector<double> const& input)
 {
   return 1/(1+exp(-thetaTX(input)));
