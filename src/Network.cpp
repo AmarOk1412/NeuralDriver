@@ -74,9 +74,24 @@ std::vector<double> Network::forwardProp(std::vector<double> const& input)
 	return ninput;
 }
 
-void backprop(std::vector<double> X, std::vector<double> y)
+void Network::backprop(std::vector<double> X, std::vector<double> output, std::vector<double> y)
 {
 	//TODO
+//	assert(output.size() == y.size());
+//	std::vector<double> pdelta;
+//	for(auto i = 0; i < output.size(); ++i)
+//	  pdelta.push_back(output.at(i) - y.at(i)); 
+//	for(auto l = _network.size()-1; l >= 0; --l)
+//	{
+//	  
+//	}
+}
+
+
+double Network::sigmoidGradient(double z)
+{
+  double sigmoid = 1/(1+std::exp(-z));
+  return sigmoid*(1-sigmoid);
 }
 
 void Network::print() const

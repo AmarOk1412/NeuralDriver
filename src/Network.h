@@ -14,7 +14,8 @@ class Network
     double costfunction(std::vector<double> const& X, std::vector<double> const& ol, 
     																									std::vector<double> const& y);
     std::vector<double> forwardProp(std::vector<double> const& input);
-    void backprop(std::vector<double> X, std::vector<double> y);
+    void backprop(std::vector<double> X, std::vector<double> output, std::vector<double> y);
+    double sigmoidGradient(double z);
     
     void print() const;
     
