@@ -25,8 +25,8 @@ double Network::costfunction(std::vector<double> const& X, std::vector<double> c
 																													 std::vector<double> const& y)
 {
   //One iteration. X -> input. ol -> output layer; y -> expected output
-  //TODO DEBUG, doesn't work at all
-	double J;
+  //TODO test
+	double J = 0.;
 	auto m = X.size();
 	auto K = _network.back().size();
 	for(auto k=0; k<K; ++k)
@@ -36,11 +36,10 @@ double Network::costfunction(std::vector<double> const& X, std::vector<double> c
 		double termB = (1-y.at(k))*std::log(1 - ol.at(k));
 	  J += termA + termB;
 	}
-	
-	J *= -1/m;	
+	J /= -m; 
 	
 	//J += lambda/(2*m) * (sum(sum(Theta1(:, 2:end) .^ 2)) + sum(sum(Theta2(:, 2:end) .^ 2)))...;
-	double regularizationTerm = 0;
+	double regularizationTerm = 0.;
 	auto LM1 = _network.size() - 1;
 	for(auto l = 0; l < LM1; ++l)
 	{
@@ -53,7 +52,8 @@ double Network::costfunction(std::vector<double> const& X, std::vector<double> c
 	  	  regularizationTerm += std::pow(unit.getThetas().at(t),2);
 	  }
 	}
-	regularizationTerm *= _lambda/(2*m);
+	regularizationTerm *= _lambda;
+	regularizationTerm /= (2*m);
 	J += regularizationTerm;
 	
 	return J;
