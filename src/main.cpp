@@ -1,10 +1,17 @@
-#include "Network.h"
-#include <vector>
-#include <iostream>
+#include "neuron.h"
 
 int main() {
+  Neuron a(2);
+  std::cout << a;
+  std::vector<double> input;
+  input.push_back(0.);
+  input.push_back(1.);
+  std::cout << "Output : " << a.output(input) << std::endl;
+  a.adjustForError(0.2);
+  std::cout << a;
 
-  std::vector<int> sn;
+
+  /*std::vector<int> sn;
   sn.push_back(2);
   sn.push_back(1);
 	Network network(sn);
@@ -28,7 +35,14 @@ int main() {
 	real.push_back(1.);
 	real.push_back(1.5);
 	std::cout << network.costfunction(input, output, output) << std::endl;
-	std::cout << network.costfunction(expected, real, expected) << std::endl;
+	
+	std::vector<double> expected2;
+	expected2.push_back(1.);
+	std::cout << "Back propagation : \n";	
+	network.print();
+	network.backprop(input, output, expected2);
+	network.print();*/
+	
 	//TODO : test costfunction
 	//TODO : implement back prop
   return 0;
