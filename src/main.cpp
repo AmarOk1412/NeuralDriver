@@ -1,49 +1,33 @@
-#include "neuron.h"
+#include "network.h"
 
 int main() {
+	
+  std::cout << "Test Neuron : " << std::endl;
   Neuron a(2);
-  std::cout << a;
+  std::cout << a << std::endl;;
   std::vector<double> input;
   input.push_back(0.);
   input.push_back(1.);
   std::cout << "Output : " << a.output(input) << std::endl;
-  a.adjustForError(0.2);
-  std::cout << a;
-
-
-  /*std::vector<int> sn;
-  sn.push_back(2);
+  a.error = 0.2;
+  a.adjustForError();
+  std::cout << a << std::endl;;
+  std::cout << "_______________________________\n";
+  
+  std::cout << "Test Network : " << std::endl;
+	std::vector<unsigned int> sn;
   sn.push_back(1);
-	Network network(sn);
-	std::cout << "Network : " << std::endl;
-	network.print();
+	Network network(sn, 2);
+	std::cout << network;
 	
-	std::vector<double> input;
-	input.push_back(0.);
-	input.push_back(1.);
 	std::cout << "Output : ";
-	std::vector<double> output = network.forwardProp(input);
+	std::vector<double> output = network.output(input);
 	std::cout << output.at(0) << std::endl;
 	
-	std::cout << "Cost function : ";
-	std::vector<double> expected;
-	expected.push_back(1.);
-	expected.push_back(2.);
-	expected.push_back(3.);
-	std::vector<double> real;
-	real.push_back(.5);
-	real.push_back(1.);
-	real.push_back(1.5);
-	std::cout << network.costfunction(input, output, output) << std::endl;
-	
-	std::vector<double> expected2;
-	expected2.push_back(1.);
-	std::cout << "Back propagation : \n";	
-	network.print();
-	network.backprop(input, output, expected2);
-	network.print();*/
-	
-	//TODO : test costfunction
-	//TODO : implement back prop
+	std::cout << "Train\n";
+	std::vector<double> out;
+	out.push_back(1.);
+	network.Train(input, out);	
+	std::cout << network;
   return 0;
 }

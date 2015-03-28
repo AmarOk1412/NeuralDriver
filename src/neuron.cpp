@@ -9,6 +9,7 @@ Neuron::Neuron(int numInputs, double epsilon, double learn) : _learningRate(lear
 	_weights.resize(numInputs);
 	_lastInp.resize(numInputs, 1.);
 	resetWeights(epsilon);
+	error = .0;
 }
 
 double Neuron::sigmoid(double val) const 
@@ -34,7 +35,7 @@ void Neuron::resetWeights(double epsilon) {
    _biase = unif(rand_engine);
 }
 
-void Neuron::adjustForError(double error) {
+void Neuron::adjustForError() {
 	for(unsigned int wt = 0; wt < _weights.size(); wt++)
 		_weights[wt] += _learningRate * error * _lastInp[wt];
 	_biase += _learningRate * error;
@@ -46,6 +47,6 @@ std::ostream& operator<<(std::ostream & out, const Neuron& n)
 	const std::vector<double> w = n.weights();
 	for(unsigned int i = 0; i < w.size(); i++)
 		out << w[i] << ",";
-	out << n.biase() << " (biase)]\n";
+	out << n.biase() << " (biase)]";
 	return out;
 }
