@@ -1,4 +1,4 @@
-CXXFLAGS= -std=c++11 -pthread 
+CXXFLAGS= -std=c++11 -pthread -Wall
 CPP_FILES := $(wildcard *.cpp)
 H_FILES := $(wildcard *.h)
 

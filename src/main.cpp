@@ -9,7 +9,7 @@ int main() {
   input.push_back(0.);
   input.push_back(1.);
   std::cout << "Output : " << a.output(input) << std::endl;
-  a.error = 0.2;
+  a.error = 0.3;
   a.adjustForError();
   std::cout << a << std::endl;;
   std::cout << "_______________________________\n";
@@ -20,14 +20,17 @@ int main() {
 	Network network(sn, 2);
 	std::cout << network;
 	
-	std::cout << "Output : ";
-	std::vector<double> output = network.output(input);
-	std::cout << output.at(0) << std::endl;
+	for(int i = 0; i < 1000; ++i)
+	{
+		std::cout << "Output : ";
+		std::vector<double> output = network.output(input);
+		std::cout << output.at(0) << std::endl;
 	
-	std::cout << "Train\n";
-	std::vector<double> out;
-	out.push_back(1.);
-	network.Train(input, out);	
-	std::cout << network;
+		std::cout << "Train\n";
+		std::vector<double> out;
+		out.push_back(0.);
+		network.Train(input, out);	
+		std::cout << network;
+	}
   return 0;
 }

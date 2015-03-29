@@ -44,23 +44,22 @@ void Network::Train(const std::vector<double> &inputs,const std::vector<double> 
 		//Update the output weights
 		_network[_network.size() - 1][i].adjustForError();
 	}	
-	//Back propogate the error TODO DEBUG
+	//Back propogate the error
 	//decrement i to move back to the second to last layer
-//	for(unsigned int i = _network.size() - 2; i >= 0; i--) {
-//		for(unsigned int hid = 0; hid < _network[i].size(); hid++) {
-//			double backPropVal = 0;
-//			//Summation of: (W_i * Err_i)
-//			for(unsigned int bpvI = 0; bpvI < _network[i+1].size(); bpvI++) {
-//				backPropVal += (_network[i+1][bpvI].weights()[hid] * _network[i+1][bpvI].error);
-//			}
+	for(int i = _network.size() - 2; i >= 0; i--)
+		for(unsigned int hid = 0; hid < _network[i].size(); hid++)
+		{
+			double backPropVal = 0;
+			//Summation of: (W_i * Err_i)
+			for(unsigned int bpvI = 0; bpvI < _network[i+1].size(); bpvI++)
+				backPropVal += (_network[i+1][bpvI].weights()[hid] * _network[i+1][bpvI].error);
 
-//			//Error = O * (1 - O) * E(W_i * Err_i)
-//			_network[i][hid].error = _network[i][hid].result * (1 - _network[i][hid].result) * backPropVal;
+			//Error = O * (1 - O) * E(W_i * Err_i)
+			_network[i][hid].error = _network[i][hid].result * (1 - _network[i][hid].result) * backPropVal;
 
-//			//Update weights for hidden layer
-//			_network[i][hid].adjustForError();
-//		}
-//	}
+			//Update weights for hidden layer
+			_network[i][hid].adjustForError();
+		}
 }
 
 //[Async]
